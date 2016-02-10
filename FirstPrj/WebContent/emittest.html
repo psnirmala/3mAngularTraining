@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="js/angular.js"></script>
+<script type="text/javascript">
+var firstModule=angular.module("FirstModule", []);
+firstModule.controller("firstController", function($scope) {
+	$scope.dataAvailable=false;
+	$scope.$on("supply",function(e,data){
+		$scope.data=data;
+		$scope.dataAvailable=true;
+	});
+});
+firstModule.controller("secondController", function($scope) {
+	$scope.dataAvailable=false;
+	$scope.$on("supply",function(e,data){
+		$scope.data=data;
+		$scope.dataAvailable=true;
+	});
+});
+firstModule.controller("thirdController", function($scope) {
+	
+	$scope.sendToParent=function(){
+		$scope.$emit("supply","this is an emit message");	
+	};
+});
+
+</script>
+</head>
+<body>
+<div ng-app="FirstModule">
+<div ng-controller="firstController" style="width: 300px;height: 400px;border: 1px solid red;">
+<label ng-if="dataAvailable">{{data}}</label>
+<div ng-controller="secondController" style="width: 200px;height: 100px;border: 1px solid blue;">
+<label ng-if="dataAvailable">{{data}}</label>
+<div ng-controller="thirdController" style="width: 100px;height: 50px;border: 1px solid green;margin-left: 10px;
+margin-top: 10px">
+<button ng-click="sendToParent()">Send Data to Parent</button>
+</div>
+</div>
+
+</div>
+</div>
+
+</body>
+</html>

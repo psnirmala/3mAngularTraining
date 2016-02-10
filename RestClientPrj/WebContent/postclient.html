@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<script src="js/angular.js"></script>
+<script src="js/angular-resource.js"></script>
+<script src="js/services/restClientModule.js"></script>
+<script type="text/javascript">
+angular.module("testModule", ["restClientModule"])
+.controller("testController",function($scope,firstRestService){
+	$scope.completed=false;
+	$scope.addEmployee=function()
+	{
+		var promise=firstRestService.addEmployee({
+			"name":$scope.ename,
+			"designation":$scope.designation
+		});
+		promise.then(function(response){
+			console.log(response);
+			/*var a="";
+			for(i in response){
+				console.log(i);
+				a+=response.i;
+			}*/
+		//	console.log(a);
+			$scope.message="Added";
+			$scope.completed=true;
+		});
+		
+	}
+});
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body ng-app="testModule" ng-controller="testController">
+Name <input type="text" ng-model="ename">
+<br>
+Designation <input type="text" ng-model="designation">
+<br>
+<button ng-click="addEmployee()">Add Employee</button>
+<div ng-if="completed">
+{{message}}
+</div>
+</body>
+</html>

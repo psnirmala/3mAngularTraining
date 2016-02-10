@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+<script src="js/angular.js"></script>
+<script type="text/javascript">
+angular.module("firstModule",[]).run(function($rootScope){
+	$rootScope.message="This is first module";
+});
+angular.module("secondModule",[]).run(function($rootScope){
+	$rootScope.message="This is second  module";
+});
+
+</script>
+</head>
+<body>
+<div ng-app="firstModule">
+{{message}}
+</div>
+
+<div  id="div2">
+{{message}}
+</div>
+<script type="text/javascript">
+angular.bootstrap(document.getElementById("div2"),["secondModule"]);
+</script>
+</body>
+</html>

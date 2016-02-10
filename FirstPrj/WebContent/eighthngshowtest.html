@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/angular.js"></script>
+<script type="text/javascript">
+angular.module("testModule", [])
+.controller("testController",function(){
+	$scope.isShown=true;
+	$scope.label="Hide";
+	$scope.update=function(){
+		$scope.isShown=!$scope.isShown;
+		$scope.label=$scope.isShown?"Hide":"Display";
+	};
+});
+</script>
+</head>
+<body ng-app="testModule" ng-controller="testController">
+<button id="btnDisplay" ng-click="update()">{{label}}</button>
+<br>
+<!--  
+<label ng-hide="!isShown">This is a test message</label>
+-->
+<label ng-show="isShown">This is a test message</label>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<script src="js/angular.js"></script>
+<script src="js/angular-resource.js"></script>
+<script src="js/services/restClientModule.js"></script>
+<script type="text/javascript">
+angular.module("testModule", ["restClientModule"])
+.controller("testController",function($scope,firstRestService){
+	$scope.dataAvailable=false;
+	$scope.getEmployees=function()
+	{
+		var promise=firstRestService.getAllEmployeesData();
+		console.log(promise);
+		promise.then(function(response){
+			console.log(response);
+		$scope.employees=response;
+		$scope.dataAvailable=true;
+		},function(error){
+			console.log(error);
+		});
+	}
+});
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body ng-app="testModule" ng-controller="testController">
+<br>
+<button ng-click="getEmployees()">Get All Employees</button>
+<div ng-if="dataAvailable">
+<table border="2">
+<thead>
+<tr><th>Id</th><th>Name</th><th>Designation</th></tr>
+</thead>
+<tbody>
+<tr ng-repeat="emp in employees">
+<th>{{emp.id}}</th><th>{{emp.name}}</th><th>{{emp.designation}}</th>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

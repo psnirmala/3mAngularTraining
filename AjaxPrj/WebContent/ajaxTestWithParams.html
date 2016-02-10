@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript"  src="js/angular.js"></script>
+<script type="text/javascript"  src="js/services/ajaxServiceModule.js"></script>
+<script type="text/javascript">
+var module=angular.module("testModule", ["ajaxServiceModule"]);
+module.controller("testController", function($scope,employeeService) {
+	$scope.dataAvailable=false;
+	$scope.isError=false;
+	$scope.getDetails=function()
+	{
+		var promise=employeeService.postData({"empName":$scope.ename});
+		promise.then(function(response){
+			console.log(JSON.stringify(response));
+			$scope.employee=response.data;
+			console.log(JSON.stringify($scope.employee));
+			$scope.dataAvailable=true;
+		},function(error){
+			//console.log(error);
+			$scope.error=error;
+			$scope.isError=true;
+		});
+	};
+});
+
+</script>
+</head>
+<body ng-app="testModule" ng-controller="testController">
+Name <input type="text" ng-model="ename">
+<br>
+<button ng-click="getDetails()">Get Details</button>
+<div ng-if="dataAvailable">
+Id {{employee.id}}
+<br>
+Name {{employee.name}}
+<br>
+Designation {{employee.designation}}
+</div>
+<div ng-if="isError" style="color: red;">
+Error in sending the request.
+<br>
+status code {{error.status}}
+<br>
+Message {{error.statusText}}
+</div>
+</body>
+</html>

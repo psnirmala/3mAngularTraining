@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="js/angular.js"></script>
+<script type="text/javascript">
+var firstModule=angular.module("FirstModule", []);
+firstModule.controller("firstController", function($scope) {
+	$scope.name="Arun"
+});
+
+</script>
+</head>
+<body>
+<div ng-app="FirstModule">
+<div ng-controller="firstController">
+Name  <input type="text" ng-model="name">
+<br>
+Welcome {{name}}
+</div>
+</div>
+
+</body>
+</html>

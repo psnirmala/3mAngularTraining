@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="js/angular.js"></script>
+<script type="text/javascript">
+/*var firstModule=angular.module("FirstModule", []);
+firstModule.controller("firstController", function($scope) {
+	$scope.add=function()
+	{
+	$scope.sum=$scope.first+$scope.second;
+	}
+});
+*/
+
+angular.module("FirstModule", []).
+controller("firstController", function($scope) {
+	$scope.add=function()
+	{
+	$scope.sum=$scope.first+$scope.second;
+	}
+});
+
+</script>
+</head>
+<body>
+<div ng-app="FirstModule">
+<div ng-controller="firstController">
+First Number <input type="number" ng-model="first">
+<br>
+Second Number <input type="number" ng-model="second">
+<button ng-click="add()">Add</button>
+<br>
+Sum {{sum}}
+</div>
+</div>
+
+</body>
+</html>

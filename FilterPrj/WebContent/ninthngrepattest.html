@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+<style type="text/css">
+.oddStyle{
+background-color: aqua;
+color: red;
+}
+.evenStyle{
+background-color: olive;
+color: white;
+}
+
+.firstStyle{
+background-color: red;
+color: white;
+}
+.lastStyle{
+background-color: lime;
+color: red;
+}
+
+</style>
+<script type="text/javascript" src="js/angular.js"></script>
+<script type="text/javascript" src="js/filters/filterModule.js">
+</script>
+<script type="text/javascript">
+angular.module("testModule", ["filterModule"])
+.controller("testController",function($scope){
+	$scope.employees=[
+	                  {
+	                	  "id":1,
+	                	  "name":"Arjun",
+	                	  "designation":"Developer"
+	                  },
+	                  {
+	                	  "id":2,
+	                	  "name":"Deva",
+	                	  "designation":"Accountant"
+	                	  
+	                  },
+	                  {
+	                	  "id":3,
+	                	  "name":"Raju",
+	                	  "designation":"Architect"
+	                	  
+	                  },
+	                  {
+	                	  "id":4,
+	                	  "name":"Arvind",
+	                	  "designation":"Architect"
+	                	  
+	                  },
+	                  {
+	                	  "id":5,
+	                	  "name":"Mahesh",
+	                	  "designation":"Architect"
+	                	  
+	                  }
+	                ];
+	
+});
+</script>
+</head>
+<body ng-app="testModule" ng-controller="testController" >
+
+<table border="2">
+<thead><tr><th>Id</th><th>Name</th><th>Designation</th></tr></thead>
+<tbody>
+<tr ng-repeat="emp in employees | filter: 'Architect'|orderBy:'name'" ng-class="{oddStyle:$odd,evenStyle:$even,firstStyle:$first,lastStyle:$last}">
+<td>{{emp.id}}</td><td>{{emp.name}}</td><td>{{emp.designation}}</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

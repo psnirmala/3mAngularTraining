@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+<style type="text/css">
+#div1{
+width: 300px;
+height: 200px;
+background-color: lime;
+text-align: center;
+}
+</style>
+<script type="text/javascript" src="js/angular.js"></script>
+<script type="text/javascript" src="js/angular-route.js"></script>
+<script type="text/javascript">
+var module=angular.module("testModule",["ngRoute"]);
+module.run(function($rootScope){
+	$rootScope.data=[1,2,3,4,5];
+});
+module.controller("firstController",function($scope,$routeParams)
+{
+		
+	$scope.message="This is mesage from first controller "+$routeParams.id;
+});
+module.controller("secondController",function($scope)
+		{
+			$scope.message="This is mesage from second controller";
+		
+		});
+
+module.controller("homeController",function($scope)
+{
+			$scope.message="This is mesage from home controller";
+	
+});
+
+module.config(function($routeProvider) {
+		$routeProvider.when("/",{
+			"templateUrl": "dynamicViews/common.html",
+			"controller":"homeController"
+		}).when("/first/:id", {
+			"templateUrl": "dynamicViews/common.html",
+			"controller":"firstController"
+		}).when("/second", {
+			"templateUrl": "dynamicViews/common.html",
+			"controller":"secondController"
+		}).otherwise({
+			"redirectTo":"/"
+			});
+	
+});
+
+</script>
+</head>
+<body ng-app="testModule">
+<ul>
+<li><a href="#/">Default Route</a></li>
+<li><a href="#/second">Second Route</a></li>
+<li ng-repeat="i in data"><a ng-href="#/first/{{i}}">Customer {{i}}</a></li>
+</ul>
+<h1>Example SPA App</h1>
+<div id="div1" ng-view></div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+<style type="text/css">
+#imageElement{
+width: 100px;
+height: 100px;
+border: 2px solid blue;
+}
+</style>
+<script src="js/angular.js"></script>
+<script type="text/javascript">
+angular.module("testModule",[])
+.controller("testController",function($scope){
+	$scope.image="Desert";
+	
+});
+</script>
+</head>
+<body ng-app="testModule" ng-controller="testController">
+<select ng-model="image">
+<option value="Desert">Desert</option>
+<option value="Jellyfish">Jelly Fish</option>
+<option value="Lighthouse">Light House</option>
+</select>
+<div>
+<img ng-src="images/{{image}}.jpg" id="imageElement">
+</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<script src="js/angular.js"></script>
+<script src="js/angular-resource.js"></script>
+<script src="js/services/moduleRestClientModule.js"></script>
+<script type="text/javascript">
+angular.module("testModule", ["moduleRestClientModule"])
+.controller("testController",function($scope,moduleRestService){
+	$scope.completed=false;
+	$scope.addModule=function()
+	{
+		console.log($scope.view+" "+$scope.add+" "+$scope.delete);
+		var promise=moduleRestService.addModule({"view":$scope.view,"add":$scope.add,"delete":$scope.delete});
+		promise.then(function(response){
+			console.log(response);
+			
+			$scope.message="Added";
+			$scope.completed=true;
+		});
+		
+	}
+});
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body ng-app="testModule" ng-controller="testController">
+View <input type="checkbox" ng-model="view">
+<br>
+Add <input type="checkbox" ng-model="add">
+<br>
+Delete <input type="checkbox" ng-model="delete">
+<br>
+<button ng-click="addModule()">Add Module</button>
+<div ng-if="completed">
+{{message}}
+</div>
+</body>
+</html>

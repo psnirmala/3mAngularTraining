@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/angular.js">
+</script>
+<script type="text/javascript">
+angular.module("testModule",[])
+.controller("testController",function($cacheFactory,$scope,$http){
+	var cache=$cacheFactory("myCache",{"capacity":3});
+	$scope.dataAvailable=false;
+	$scope.getData=function(){
+			var promise=$http.get("customer.json",{
+				"cache":"myCache"
+			});
+			promise.then(function(response){
+				$scope.data=response.data;
+			});
+		$scope.dataAvailable=true;
+		};
+	
+});
+</script>
+</head>
+<body ng-app="testModule" ng-controller="testController">
+<button ng-click="getData()">Get Data</button>
+<div ng-if="dataAvailable">
+Id {{data.id}}
+<br>
+Name {{data.name}}
+<br>
+Balance {{data.balance}}
+</div>
+</body>
+</html>

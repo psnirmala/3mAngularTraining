@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="js/angular.js"></script>
+<script type="text/javascript">
+var firstModule=angular.module("FirstModule", []);
+firstModule.controller("firstController", function($scope) {
+	$scope.validate=function()
+	{
+	if($scope.user=="user1"&&$scope.password=="pass2"){
+		alert("Successfully logged in");
+	}	
+	else{
+		alert("Invalid username/password. Retry")
+	}
+	}
+});
+
+</script>
+</head>
+<body>
+<div ng-app="FirstModule">
+<div ng-controller="firstController">
+UserName <input type="text" ng-model="user">
+<br>
+Password <input type="password" ng-model="password">
+<br>
+<button ng-click="validate()">Login</button>
+</div>
+</div>
+
+</body>
+</html>

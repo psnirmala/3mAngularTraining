@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+<script src="js/angular.js"></script>
+<script type="text/javascript">
+var module=angular.module("testModule", []);
+module.config(function(){
+	console.log("This is the config phase");
+});
+module.run(function($rootScope){
+	console.log("This is the run phase");
+	$rootScope.message="hello world ";
+	$rootScope.employee={
+		"id":101,
+		"name":"Arjun"
+	};
+});
+module.controller("firstController",function($scope){
+	$scope.message=$scope.message+" first";
+	/*$scope.employee.id=$scope.employee.id+1;
+	$scope.employee.name=$scope.employee.name+" Sharma";*/
+	$scope.employee={
+		"id":$scope.employee.id+1,
+		"name":$scope.employee.name+" Sharma"
+	};
+});
+module.controller("secondController",function($scope){
+	$scope.message=$scope.message+" second";
+	/*$scope.employee.id=$scope.employee.id+1;
+	$scope.employee.name=$scope.employee.name+" Patil";*/
+	$scope.employee={
+			"id":$scope.employee.id+2,
+			"name":$scope.employee.name+" Patil"
+	};
+});
+</script>
+</head>
+<body ng-app="testModule">
+{{message}}
+<br>
+Employee Id {{employee.id}}
+<br>
+Employee Name {{employee.name}}
+<div ng-controller="firstController">
+{{message}}
+<br>
+Employee Id {{employee.id}}
+<br>
+Employee Name {{employee.name}}
+
+</div>
+<div ng-controller="secondController">
+{{message}}
+<br>
+Employee Id {{employee.id}}
+<br>
+Employee Name {{employee.name}}
+</div>
+
+
+</body>
+</html>

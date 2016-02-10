@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript" src="js/angular.js"></script>
+<script type="text/javascript" src="js/services/thirdServiceModule.js"></script>
+<script type="text/javascript">
+var module=angular.module("testModule", ["thirdServiceModule"])
+.config(function(thirdServiceProvider) {
+	thirdServiceProvider.setMessage("This message is set by config method-->Hello")
+});
+
+module.controller("firstController",function(thirdService,$scope){
+	$scope.message=thirdService.getMessage();
+});
+
+</script>
+<title>Insert title here</title>
+</head>
+<body ng-app="testModule" ng-controller="firstController">
+{{message}}
+</body>
+</html>

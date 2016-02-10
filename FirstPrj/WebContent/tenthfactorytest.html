@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+
+<script type="text/javascript" src="js/angular.js">
+</script>
+<script type="text/javascript" src="js/services/testServiceModule.js"></script>
+<script type="text/javascript" src="js/services/secondServiceModule.js"></script>
+<script type="text/javascript">
+angular.module("testModule", ["testServiceModule","secondServiceModule"])
+.controller("testController",function($scope,testService,secondService){
+	$scope.message=secondService.getMessage();
+	$scope.dataAvailable=false;
+	$scope.displayData=function(){
+		$scope.customers=testService.getData();
+		$scope.dataAvailable=true;
+	};
+	$scope.addCustomer=function()
+	{
+		testService.addData({"id":$scope.custId,"name":$scope.custName,"balance":$scope.balance});
+	}
+});
+</script>
+</head>
+<body ng-app="testModule" ng-controller="testController"  ng-cloak>
+<h2>{{message}}</h2>
+Id <input type="text" ng-model="custId">
+<br>
+Name<input type="text" ng-model="custName">
+<br>
+Balance <input type="text" ng-model="balance">
+<br>
+<button ng-click="addCustomer()">Add Customer</button>
+<button ng-click="displayData()">Display Data</button>
+<table border="2" ng-if="dataAvailable">
+<thead><tr><th>Id</th><th>Name</th><th>Balance</th></tr></thead>
+<tbody>
+<tr ng-repeat="cust in customers">
+<td>{{cust.id}}</td><td>{{cust.name}}</td><td>{{cust.balance}}</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+<style type="text/css">
+#div1{
+width: 300px;
+height: 200px;
+background-color: lime;
+text-align: center;
+}
+</style>
+<script type="text/javascript" src="js/angular.js"></script>
+<script type="text/javascript" src="js/angular-route.js"></script>
+<script type="text/javascript">
+var module=angular.module("testModule",["ngRoute"]);
+module.config(function($routeProvider) {
+		$routeProvider.when("/",{
+			"template": "<h2>This is  the home page</h2>"
+		}).when("/first", {
+			"template": "<h2>This is  the first page</h2>"
+		}).when("/second", {
+			"template": "<h2>This is  the second page</h2>"
+		}).otherwise({
+			"redirectTo":"/"
+			});
+	
+});
+
+</script>
+</head>
+<body ng-app="testModule">
+<ul>
+<li><a href="#/">Default Route</a></li>
+<li><a href="#/first">First Route</a></li>
+<li><a href="#/second">Second Route</a></li>
+</ul>
+<h1>Example SPA App</h1>
+<div id="div1" ng-view></div>
+</body>
+</html>
